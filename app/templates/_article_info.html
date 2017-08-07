@@ -15,7 +15,7 @@
             <a href="{{ url_for('main.articleTypes', id=article.articleType.id) }}" target="_blank" style="color: white">
                 {{ article.articleType.name }}
             </a>
-        </span>
+        </span>&nbsp;
         <span class="label label-info">
             <a href="{{ url_for('main.articleTypes', id=article.articleType.id) }}" target="_blank" style="color: white">
                 {{ article.articleType.name }}
@@ -26,6 +26,9 @@
         <span class="label label-primary">浏览 {{ article.num_of_view }}</span>
         <span class="label label-success">评论 {{ article.comments.count() }}</span>
     </div>
+</div>
+<div class="article-entry-sum">
+    <p>{{ article.summary }}</p>
 </div>
 <div class="article-entry-sum">
     <p>{{ article.summary }}</p>
