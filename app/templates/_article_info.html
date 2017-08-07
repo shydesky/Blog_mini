@@ -16,6 +16,11 @@
                 {{ article.articleType.name }}
             </a>
         </span>
+        <span class="label label-info">
+            <a href="{{ url_for('main.articleTypes', id=article.articleType.id) }}" target="_blank" style="color: white">
+                {{ article.articleType.name }}
+            </a>
+        </span>
     </div>
     <div class="main-info">
         <span class="label label-primary">浏览 {{ article.num_of_view }}</span>
