@@ -1,10 +1,11 @@
+import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager
 from flask_wtf.csrf import CsrfProtect
 from flask_moment import Moment
-from config import Config
+from config import Config, ProdConfig, DevConfig
 
 
 db = SQLAlchemy()
@@ -17,8 +18,9 @@ login_manager.login_view = 'auth.login'
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
-    Config.init_app(app)
+    config = which_config()
+    app.config.from_object(config)
+    config.init_app(app)
     CsrfProtect(app)
 
     db.init_app(app)
@@ -36,3 +38,13 @@ def create_app():
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app
+
+
+def which_config():
+    config_dict = {
+        'prod': ProdConfig,
+        'dev': DevConfig,
+    }
+    environ = os.environ.get('USE_CONFIG', 'dev')
+    config = config_dict.get(environ)
+    return config

@@ -23,3 +23,11 @@ class Config():
     @staticmethod
     def init_app(app):
         pass
+
+
+class ProdConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:1234@127.0.0.1/blog_mini'
+
+
+class DevConfig(Config):
+    pass
